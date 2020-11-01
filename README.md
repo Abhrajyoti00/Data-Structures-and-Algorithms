@@ -17,3 +17,4 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 8) Generic Trees
 9) Dictionaries
 10) HashMaps
+11) Priority Queues - 1
