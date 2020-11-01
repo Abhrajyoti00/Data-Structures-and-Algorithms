@@ -14,3 +14,6 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 5) Binary Tree 2
 6) Binary Search Tree 1
 7) Binary Search Tree 2
+8) Generic Trees
+9) Dictionaries
+10) HashMaps
