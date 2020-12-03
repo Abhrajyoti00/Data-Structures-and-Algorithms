@@ -20,3 +20,4 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 11) Priority Queues - 1
 12) Priority Queues - 2
 13) Huffman Coding
+14) Dynamic Programming
