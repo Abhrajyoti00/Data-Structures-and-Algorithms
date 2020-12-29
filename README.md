@@ -24,3 +24,4 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 15) Recursion - 3 
 16) Backtracking
 17) Graphs - 1
+18) Graphs - 2
