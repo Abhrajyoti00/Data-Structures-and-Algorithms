@@ -26,3 +26,10 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 17) Graphs - 1
 18) Graphs - 2
 19) 2048 GAME PROJECT
+20) Array
+
+## This repo also contains the solution to the 450 Qs for DSA prepared by Love Babbar Bhaiya
+
+The topics Covered are:-
+
+1) Array
