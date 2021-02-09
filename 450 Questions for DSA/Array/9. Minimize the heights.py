@@ -1,7 +1,10 @@
 def getMinDiff(arr, n, k):
-    arr.sort()
-    mxs=[]
-    mns=[]
+    arr = list(set(arr))
+    arr = sorted(arr)
+    
+    n = len(arr)
+    mxs=list()
+    mns=list()
     for i in arr:
         mxs.append(i+k)
         mns.append(i-k)
@@ -9,7 +12,7 @@ def getMinDiff(arr, n, k):
     for i in range(1,n):
         if(mns[i]>=0):
             ans=min(ans,max(mns[n-1],mxs[i-1])-min(mns[i],mxs[0]))
-    return ans
+    return ans 
 
 a=[6, 1, 9, 1, 1, 7, 9, 5, 2, 10]
 print(getMinDiff(a,len(a),4))
