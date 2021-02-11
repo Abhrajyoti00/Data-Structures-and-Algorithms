@@ -20,29 +20,64 @@ using namespace std;
 
 // O(n^2) Soln .. DP Soln
 
-int minJumps(int arr[], int n){
-    int *jumps = new int[n+1];
-    int i, j;
-    if (n == 0 || arr[0] == 0)
-        return -1;
-    jumps[0] = 0;
-    for(i = 1; i<n; i++){
-        jumps[i] = INT_MAX;
+// int minJumps(int arr[], int n){
+//     int *jumps = new int[n+1];
+//     int i, j;
+//     if (n == 0 || arr[0] == 0)
+//         return -1;
+//     jumps[0] = 0;
+//     for(i = 1; i<n; i++){
+//         jumps[i] = INT_MAX;
 
-        for(j = 0; j < i; j++){
-            if(i<=j+arr[j] && jumps[j]!=INT_MAX){
-                jumps[i] = min(jumps[i], jumps[j]+1);  //Jumping from that least position + 1
-                break;
-            }
+//         for(j = 0; j < i; j++){
+//             if(i<=j+arr[j] && jumps[j]!=INT_MAX){
+//                 jumps[i] = min(jumps[i], jumps[j]+1);  //Jumping from that least position + 1
+//                 break;
+//             }
+//         }
+//     }
+//     if(jumps[n-1]!= INT_MAX)
+//         return jumps[n-1];
+//     else
+//         return -1;
+// }
+
+// O(n) Solution : Keeping track of few things
+
+int minJumps(int arr[], int n)
+{
+    int jumps, maxReachableIndex, stepsPossible;
+
+    // INITIALLY
+
+    jumps = 1;
+    maxReachableIndex = 1;
+    stepsPossible = arr[0];
+
+    if (n <= 1)
+        return 0;
+    if (arr[0] == 0)
+        return -1;
+    for (int i = 1; i < n; i++)
+    {
+        if (i == n - 1)
+            return jumps;
+
+        maxReachableIndex = max(maxReachableIndex, i + arr[i]);
+        stepsPossible -= 1;
+
+        if (stepsPossible == 0)
+        {
+            // Means we have used a jump
+            if (i >= maxReachableIndex)
+                return -1;
+
+            jumps += 1;
+            stepsPossible = maxReachableIndex - i;
         }
     }
-    if(jumps[n-1]!= INT_MAX)
-        return jumps[n-1];
-    else
-        return -1;
+    return -1;
 }
-
-
 int main()
 {
     int n;
@@ -59,8 +94,6 @@ int main()
 // 0 1 1 1 1
 // Its Correct output is:
 // -1
-
-
 
 // 10
 // 2 3 1 1 2 4 2 0 1 1
