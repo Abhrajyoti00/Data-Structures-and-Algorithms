@@ -100,15 +100,16 @@ fast
 int t=1;
 // cin>>t;
 while(t--){
-    // int n = 10;
-    // cin>>n;
-    int arr[] = {1,4,2,1,4,2,4,2,1,2};
-    int n = sizeof(arr)/sizeof(arr[0]);
+    int n;
+    cin>>n;
+    // int arr[] = {1,4,2,1,4,2,4,2,1,2};
+    int arr[n];
+    // int n = sizeof(arr)/sizeof(arr[0]);
 
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin>>arr[i];
-    // }
+    for (int i = 0; i < n; i++)
+    {
+        cin>>arr[i];
+    }
     mergeSort(arr,0,n-1);
     for (int i = 0; i < n; i++)
     {
