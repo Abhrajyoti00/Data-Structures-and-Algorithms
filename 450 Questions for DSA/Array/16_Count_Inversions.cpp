@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
+// #define long long int long long
 #define pi (3.141592653589)
 #define mod 1000000007
-#define int long long
+// #define long long int long long
 #define float long double
 #define pb push_back
 #define mp make_pair
@@ -12,12 +12,12 @@ using namespace std;
 #define all(c) c.begin(), c.end()
 #define min3(arr, b, c) min(c, min(arr, b))
 #define min4(arr, b, c, d) min(d, min(c, min(arr, b)))
-#define rrep(i, n) for(int i=n-1;i>=0;i--)
-#define rep(i,n) for(int i=0;i<n;i++)
+#define rrep(i, n) for(long long int i=n-1;i>=0;i--)
+#define rep(i,n) for(long long int i=0;i<n;i++)
 #define fast ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 
 
-bool isPrime(int n) 
+bool isPrime(long long int n) 
 { 
     // Corner cases 
     if (n <= 1)  return false; 
@@ -27,69 +27,96 @@ bool isPrime(int n)
     // middle five numbers in below loop 
     if (n%2 == 0 || n%3 == 0) return false; 
   
-    for (int i=5; i*i<=n; i=i+6) 
+    for (long long int i=5; i*i<=n; i=i+6) 
         if (n%i == 0 || n%(i+2) == 0) 
            return false; 
   
     return true; 
 } 
 
-void merge(int arr[], int l, int mid, int r){
-    // Create 2 temp arrays
-
-    int n1 = mid-l+1;
-    int n2 = r-mid;
-    
-    int a[n1];
-    int b[n2]; 
-
-    // We cannot merge into the same array. So we created two temp arrays
-
-    for(int i = 0; i<n1; i++)
-        a[i] = arr[l+i];
-    for(int i = 0; i<n2; i++)
-        b[i] = arr[mid+1+i];
-
-    int i = 0;
-    int j = 0;
-    int k = l;
-    while(i<n1 && j< n2){
-        if(a[i]<b[j]){
-            arr[k] = a[i];
-            k++;
-            i++;
+long long int _mergeSort( long long int arr[], long long int temp[], long long int left, long long int right);
+long long int merge(long long int arr[], long long int temp[], long long int left, long long int mid,
+          long long int right);
+ 
+/* This function sorts the
+   input array and returns the
+number of inversions in the array */
+long long int mergeSort(long long int arr[], long long int array_size)
+{
+    long long int temp[array_size];
+    return _mergeSort(arr, temp, 0, array_size - 1);
+}
+ 
+/* An auxiliary recursive function
+  that sorts the input array and
+returns the number of inversions in the array. */
+long long int _mergeSort(long long int arr[], long long int temp[], long long int left, long long int right)
+{
+    long long int mid, inv_count = 0;
+    if (right > left) {
+        /* Divide the array long long into two parts and
+        call _mergeSortAndCountInv()
+        for each of the parts */
+        mid = (right + left) / 2;
+ 
+        /* Inversion count will be sum of
+        inversions in left-part, right-part
+        and number of inversions in merging */
+        inv_count += _mergeSort(arr, temp, left, mid);
+        inv_count += _mergeSort(arr, temp, mid + 1, right);
+ 
+        /*Merge the two parts*/
+        inv_count += merge(arr, temp, left, mid + 1, right);
+    }
+    return inv_count;
+}
+ 
+/* This funt merges two sorted arrays
+and returns inversion count in the arrays.*/
+long long int merge(long long int arr[], long long int temp[], long long int left, long long int mid,
+          long long int right)
+{
+    long long int i, j, k;
+    long long int inv_count = 0;
+ 
+    i = left; /* i is index for left subarray*/
+    j = mid; /* j is index for right subarray*/
+    k = left; /* k is index for resultant merged subarray*/
+    while ((i <= mid - 1) && (j <= right)) {
+        if (arr[i] <= arr[j]) {
+            temp[k++] = arr[i++];
         }
-        else{
-            arr[k] = b[j];
-            k++;
-            j++;
+        else {
+            temp[k++] = arr[j++];
+ 
+            /* this is tricky -- see above
+            explanation/diagram for merge()*/
+            inv_count = inv_count + (mid - i);
         }
     }
-
-    while(i<n1){
-        arr[k] = a[i];
-        k++;
-        i++;
-    }
-    while(j<n2){
-        arr[k] = b[j];
-        k++;
-        j++;
-    }
+ 
+    /* Copy the remaining elements of left subarray
+(if there are any) to temp*/
+    while (i <= mid - 1)
+        temp[k++] = arr[i++];
+ 
+    /* Copy the remaining elements of right subarray
+       (if there are any) to temp*/
+    while (j <= right)
+        temp[k++] = arr[j++];
+ 
+    /*Copy back the merged elements to original array*/
+    for (i = left; i <= right; i++)
+        arr[i] = temp[i];
+ 
+    return inv_count;
+}
+long long int inversionCount(long long arr[], long long N)
+{
+    return mergeSort(arr,N);
 }
 
-void mergeSort(int arr[], int l, int r){
-    if(l<r){
-        int mid = l + (r-l)/2;
-        mergeSort(arr,l,mid);
-        mergeSort(arr,mid+1,r);
-
-        merge(arr, l, mid, r);
-    }
-    return;
-}
-
-int32_t main(){
+ int32_t main(){
 fast
 
 
@@ -97,23 +124,27 @@ fast
 // ||| DS-ALGO Lover |||
 
 
-int t=1;
+long long int t=1;
 // cin>>t;
 while(t--){
-    // int n = 10;
-    // cin>>n;
-    int arr[] = {1,4,2,1,4,2,4,2,1,2};
-    int n = sizeof(arr)/sizeof(arr[0]);
-
-    // for (int i = 0; i < n; i++)
-    // {
-    //     cin>>arr[i];
-    // }
-    mergeSort(arr,0,n-1);
-    for (int i = 0; i < n; i++)
+    long long int n;
+    cin>>n;
+    // long long int arr[] = {1,4,2,1,4,2,4,2,1,2};
+    long long int arr[n];
+    // long long int n = sizeof(arr)/sizeof(arr[0]);
+    long long int ans = 0;
+    for (long long int i = 0; i < n; i++)
+    {
+        cin>>arr[i];
+    }
+    ans = inversionCount(arr, n);
+    cout<<"Sorted Array :- \n";
+    for (long long int i = 0; i < n; i++)
     {
         cout<<arr[i]<<" ";
     }
+   
+    cout<<"\n Count of Inversions = "<<ans;
 
 
 
