@@ -1,2 +1,3 @@
- 0:
-        newLoL = LoL
+1
+                nprd = 1
+                pnprd = 1
