@@ -33,3 +33,5 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 The topics Covered are:-
 
 1) Array
+2) Matrix
+3) Strings
