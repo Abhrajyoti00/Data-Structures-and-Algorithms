@@ -15,3 +15,7 @@ for _ in range(int(input())):
     a = list(map(int, input().split()))
     k = int(input())
     print(kthSmallest(a, 0, n-1, k))
+
+
+## Better Method = use min or max heap, pop k elements, return temporary  O(n + kLogn)
+## Best Method = Use median of median algorithm  o(n) in worst case
