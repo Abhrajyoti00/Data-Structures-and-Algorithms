@@ -25,7 +25,13 @@ def findMaxValue(mat):
             maxv = mat[i][N-1]
         maxArr[i][N-1] = maxv
     
-    #preproc
+    #preprocessing the rest of the matrix
+    for i in range(N-2,-1,-1):
+        for j in range(N-2,-1,-1):
+            if (maxArr[i+1][j+1] - mat[i][j]) > maxValue:
+                maxValue = maxArr[i+1][j+1] - mat[i][j]
+            maxArr[i][j] = max(mat[i][j], maxArr[i+1][j], maxArr[i+1][j+1])
+    return maxValue
 
 
 
