@@ -31,10 +31,7 @@ def findMaxValue(mat):
             if (maxArr[i+1][j+1] - mat[i][j]) > maxValue:
                 maxValue = maxArr[i+1][j+1] - mat[i][j]
             maxArr[i][j] = max(mat[i][j], maxArr[i+1][j], maxArr[i+1][j+1])
-    return maxValue
-
-
-
+ 
 
     print(maxArr)
     return maxValue 
