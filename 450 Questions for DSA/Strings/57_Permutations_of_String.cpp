@@ -5,19 +5,20 @@ class Solution
 {
 	public:
 
-        string reverse(string S, int start, int end){
+        // string reverse(string S, int start, int end){
+        void reverse(string &S, int start, int end){ // nickname
             while(start<end){
-                swap(&S[start], &S[end]);
+                swap(S[start], S[end]); // 12345  --> 52341 --> 54321
                 start++;
                 end--;
             }
-            return S;
+            // return S;
         }
-        void swap (char* a, char* b)  
+        void swap (char &a, char &b)  
         {  
-            char t = *a;  
-            *a = *b;  
-            *b = t;  
+            char t = a;  
+            a = b;  
+            b = t;  
         }  
 
         int findCeil(string S, char first_character, int start, int end){
@@ -53,9 +54,10 @@ class Solution
                     
                     first_character = S[i];
                     int ceil_index = findCeil(S, first_character, i+1, size-1);
-                    swap(&S[i], &S[ceil_index]);
+                    swap(S[i], S[ceil_index]);// Call
 
-                    S = reverse(S, i+1, size-1);
+                    // S = reverse(S, i+1, size-1);
+                    reverse(S, i+1, size-1);// Call by ref ???
                 }
             }
             return ans_string;
