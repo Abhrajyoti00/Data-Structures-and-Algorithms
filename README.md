@@ -1,7 +1,9 @@
 # DS-Algo
 It contains my learnings of DS and Algo from different Sources.
 
-Currently Learning from Coding Ninjas - DS Algo in Python.
+Completed Learning from Coding Ninjas - DS Algo in Python.
+
+Currently Solving the DSA Sheet of 450Qs.
 
 My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 
