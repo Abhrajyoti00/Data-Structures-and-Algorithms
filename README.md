@@ -5,6 +5,8 @@ Completed Learning from Coding Ninjas - DS Algo in Python.
 
 Currently Solving the DSA Sheet of 450Qs.
 
+Also working on DSA in C++.
+
 My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 
 ## The list of topics covered till now :- 
@@ -29,6 +31,7 @@ My worked out Data Structures and Algorithms from Coding Ninjas Course in Python
 18) Graphs - 2
 19) 2048 GAME PROJECT
 20) Array
+21) Pointers in C++
 
 ## This repo also contains the solution to the 450 Qs for DSA prepared by Love Babbar Bhaiya
 
