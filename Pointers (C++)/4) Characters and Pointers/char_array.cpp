@@ -17,7 +17,7 @@ int main(){
     cout<<b<<endl; //char array is different
 
     char *c = &b[0];
-    cout<<c<<endl; //Prints everything
+    cout<<"Line 20 "<<c<<endl; //Prints everything
 
     char c1= 'a';
     char *pc = &c1;
