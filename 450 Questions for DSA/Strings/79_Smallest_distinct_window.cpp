@@ -5,27 +5,34 @@ class Solution{
     public:
     string findSubString(string str)
     {
-        int n = str.length();
-        int start =  0, end = n-1, i ,j;
-        map<char, int>mp;
-        for(i = 0; i < n; i++){
-            mp[str[i]]++;
+        set <char> hash_map;
+        for(int i = 0; i <str.length(); i++){
+            hash_map.insert(str[i]);
         }
-        for(auto it:mp){
-            for(j = start; j<n; j++){
-                cout<<"start: "<<start<<"end : "<<end<<endl;
-                if(start == end || start<n && j!=start && str[j] == str[start]){
-                    start+=1;
+        int min_size = 1000000;
+        string ans;
+        for(int i = 0; i < str.length(); i++){
+            string sub_str = "";
+            
+            int count = 0;
+            int visited_char[256] = {0};
+            for(int j = i; j < str.length(); j++){
+                if(visited_char[str[j]] == 0){
+                    count+=1;
+                    visited_char[str[j]] = 1;
                 }
-                if(it.first == str[j]){
-                    end = j;
+                sub_str+=str[j];
+                if(count == hash_map.size()){
+                    break;
                 }
             }
+            if(sub_str.length() < min_size && count == hash_map.size()){
+                min_size = sub_str.length();
+                // cout<<"The substring "<<sub_str<<endl;
+                ans = sub_str;
+            }
         }
-        cout<<"start: "<<start<<"end : "<<end<<endl;
-        // cout<<start - end<<endl;
-        return str.substr(start,start-end);
-        // for(i = 0; i< (ascii); i++)
+        return ans;
     }
 };
 
