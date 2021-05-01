@@ -65,10 +65,26 @@ class Solution:
         # print(string_list)
         return ans
 
+    def minimumNumberOfSwaps_OnO1(self,S):
+        swap = 0
+        imbalance = 0
+        cLeft = 0
+        cRight = 0
+        for i in range(len(S)):
+            if S[i] == '[':
+                cLeft += 1
+                if imbalance>0:
+                    swap += imbalance #swaps count is last swap count + total number of imbalanced brackets
+                    imbalance-=1
+            elif S[i] == ']':
+                cRight += 1
+                imbalance = cRight - cLeft
+        return swap
 
 sol = Solution()
 S = "]][["
 # S = "[]][]["
 # S = "[[][]]"
 # print(sol.minimumNumberOfSwaps_On2O1(S))
-print(sol.minimumNumberOfSwaps_OnOn(S))
+# print(sol.minimumNumberOfSwaps_OnOn(S))
+print(sol.minimumNumberOfSwaps_OnO1(S))
