@@ -6,7 +6,6 @@ class Solution:
         for i in range(3,n+1):
             prev = count_and_say[i-1]
             str_prev = str(prev)
-            temp_list = []
             count = 1
             temp_string = ''
             for j in range(0,len(str_prev)-1):
