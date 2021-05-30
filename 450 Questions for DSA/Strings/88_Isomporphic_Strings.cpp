@@ -30,7 +30,9 @@ class Solution
 
     /* Another Approach:
 
-    In this approach, we will count the number of occurrences of a particular character in both the string using two arrays, while we will compare the two arrays if at any moment with the loop the count of the current character in both strings becomes different we return false, else after the loop ends we return true.
+    In this approach, we will count the number of occurrences of a particular character in both the string using two arrays,
+    while we will compare the two arrays if at any moment with the loop the count of the current character in both strings
+    becomes different we return false, else after the loop ends we return true.
     Follow the code given below you will understand everything.
     Below is the implementation of the above idea : */
 
