@@ -4,7 +4,7 @@ class Solution
 {
     public:
     //Function to check if two strings are isomorphic.
-    bool areIsomorphic(string str1, string str2)
+    bool areIsomorphic1(string str1, string str2)
     {
         int i;
         map<char,char>my_map;
@@ -27,12 +27,42 @@ class Solution
         }
         return true;
     }
+
+    /* Another Approach:
+
+    In this approach, we will count the number of occurrences of a particular character in both the string using two arrays, while we will compare the two arrays if at any moment with the loop the count of the current character in both strings becomes different we return false, else after the loop ends we return true.
+    Follow the code given below you will understand everything.
+    Below is the implementation of the above idea : */
+
+    bool areIsomorphic2(string str1, string str2)
+    {
+        int MAX = 256;
+        int count_of_str1[MAX] = {0};
+        int count_of_str2[MAX] = {0};
+        int n,m;
+        n = str1.length();
+        m = str2.length();
+        if(n!=m)
+            return false;
+        for(int i = 0; i<n; i++){
+            count_of_str1[str1[i]]++;
+            count_of_str2[str2[i]]++;
+
+            if(count_of_str1[str1[i]]!=count_of_str2[str2[i]])
+                return false;
+        }
+        return true;
+    }
+
+
+
 };
 
 int main(){
     string s1,s2;
     cin>>s1>>s2;
     Solution sol;
-    cout<<sol.areIsomorphic(s1,s2);
+    cout<<sol.areIsomorphic1(s1,s2);
+    cout<<sol.areIsomorphic2(s1,s2);
     return 0;
 }
