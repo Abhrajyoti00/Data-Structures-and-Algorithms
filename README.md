@@ -40,3 +40,4 @@ The topics Covered are:-
 1) Array
 2) Matrix
 3) Strings
+4) Searching & Sorting
