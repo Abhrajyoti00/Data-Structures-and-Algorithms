@@ -23,6 +23,13 @@ funcA(&myArray[0]);
 // 7 7 5 2 8 6 10 2
 // j i
 
+/*
+Insertion Sort is an easy-to-implement, stable sorting algorithm with time complexity of O(n²) in the average and worst case, 
+and O(n) in the best case.
+
+For very small n, Insertion Sort is faster than more efficient algorithms such as Quicksort or Merge Sort.
+*/
+
 void insertionSort(int arr[], int n){
     // We can even use:  int n = sizeof(arr)/sizeof(arr[0]);   --> to find the size of array.
     // Remember here size() function doesn't work. 
