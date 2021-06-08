@@ -93,7 +93,7 @@ print(maxProfit(arr, len(arr)))
 # 20
 # 9
 # 1
-# 10  - 9
+# 10  - 9F
 # 4
 # 5 - 10
 # 9 -14
@@ -111,4 +111,3 @@ print(maxProfit(arr, len(arr)))
 # 8 - 44
 # 8 
 # 0 
-
