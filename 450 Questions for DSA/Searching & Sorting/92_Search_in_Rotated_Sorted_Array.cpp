@@ -31,7 +31,7 @@ public:
         int mid = 0;
         int broken = -1;
         while (first <= last)
-        {   
+        {
             // cout<<"first = "<<first<<" last = "<<last<< " mid = "<<mid<<endl;
             mid = (first + last) / 2;
             if ((mid == n - 1) || ((arr[mid] < arr[mid - 1])) && arr[mid] < arr[mid + 1])
@@ -39,8 +39,9 @@ public:
                 broken = mid;
                 break;
             }
-            else if(mid!=n-1 && (mid == first) && (first == last)){
-                broken = n-1;
+            else if (mid != n - 1 && (mid == first) && (first == last))
+            {
+                broken = n - 1;
                 break;
             }
             // else if(mid == n-2 && arr[mid]<=arr[n-1]){
