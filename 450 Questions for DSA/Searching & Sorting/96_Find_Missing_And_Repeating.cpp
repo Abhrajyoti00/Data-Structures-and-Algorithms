@@ -46,8 +46,24 @@ public:
     //     ans[1] = missing;
     //     return ans;
     // }
-
+        // XOR VERSION 
     int *findTwoElement(int *arr, int n){
+        int XOR1 = arr[0];
+        for(int i = 1; i<n; i++){
+            XOR1 ^= arr[i]; //XOR of all array elements
+        }
+        // XOR with 1 to N
+        for(int i = 1; i<=n; i++){
+            XOR1 ^= i;
+        }
+        int missing;
+        int repeating;
+        int right_most_set_bit = XOR1 & ~(XOR1 - 1); 
+        // Suppose bin of XOR1 = 1100 (12), So bin of XOR1 - 1 = 1011 (11) (Here the rightmost bit is removed)
+        // Now taking it's complement gives = ~(1011) = (0100) (4) ... Here the only set bit is at the posn., where the 
+        // original no. (1100 : 12) had its rightmost set-bit. Consider this no. (0100) to be the mask of 
+        // the original no. (1100) Now, if we perform and operation, we get :-
+        // 1100 & 0100 ---> 0100 (Set at rightmost posn of 12). 
         
     }
 
