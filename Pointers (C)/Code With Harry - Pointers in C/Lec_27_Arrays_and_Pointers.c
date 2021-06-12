@@ -12,7 +12,6 @@ int main()
     // printf("%d\n", ptrc);
     // printf("%d\n", ptrc+1);
     // printf("%d\n", (ptrc-2));
-
     int arr[] = {1,2,3,4,5,6,7};
     int *arrayptr = arr;
     printf("The address of first element is  %d\n ", arr);
