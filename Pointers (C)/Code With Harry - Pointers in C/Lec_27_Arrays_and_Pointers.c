@@ -8,8 +8,8 @@ int main()
     // printf("%d\n", ptra+2);  // Adds +8 (Size of int)
     // char c = '3';
     // char *ptrc = &c;
-    // printf("Chars\n");
-    // printf("%d\n", ptrc);
+    // printf("Chars\n");  
+    // printf("%d\n", ptrc); 
     // printf("%d\n", ptrc+1);
     // printf("%d\n", (ptrc-2));
     int arr[] = {1,2,3,4,5,6,7};
