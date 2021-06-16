@@ -22,14 +22,13 @@ public:
     //     // cout << "and the missing element is ";
     //     for (int i = 0; i < n; i++) {
     //         if (arr[i] > 0)
-    //             ans[1] = (i + 1); // We do this because since there was no element whose value was (i+1) ... 
+    //             ans[1] = (i + 1); // We do this because since there was no element whose value was (i+1) ...
     //                               // That's why the no at index (i) is still +ve.
     //     }
     //     return ans;
     // }
 
-
-// Better but causes INteger overflow ... 
+    // Better but causes INteger overflow ...
     // int *findTwoElement(int *arr, int n)
     // {
     //     ll missing = 0, repeating = 0;     // missing = x, repeating = y
@@ -46,36 +45,57 @@ public:
     //     ans[1] = missing;
     //     return ans;
     // }
-        // XOR VERSION 
-    int *findTwoElement(int *arr, int n){
+    // XOR VERSION
+    int *findTwoElement(int *arr, int n)
+    {
         int XOR1 = arr[0];
-        for(int i = 1; i<n; i++){
+        for (int i = 1; i < n; i++)
+        {
             XOR1 ^= arr[i]; //XOR of all array elements
         }
         // XOR with 1 to N
-        for(int i = 1; i<=n; i++){
+        for (int i = 1; i <= n; i++)
+        {
             XOR1 ^= i;
         }
-        int missing;
-        int repeating;
-        int right_most_set_bit = XOR1 & ~(XOR1 - 1); 
+        int missing = 0;
+        int repeating = 0;
+        int right_most_set_bit = XOR1 & ~(XOR1 - 1);
+        int f1 = 0, f2 = 0;
         // Suppose bin of XOR1 = 1100 (12), So bin of XOR1 - 1 = 1011 (11) (Here the rightmost bit is removed)
-        // Now taking it's complement gives = ~(1011) = (0100) (4) ... Here the only set bit is at the posn., where the 
-        // original no. (1100 : 12) had its rightmost set-bit. Consider this no. (0100) to be the mask of 
+        // Now taking it's complement gives = ~(1011) = (0100) (4) ... Here the only set bit is at the posn., where the
+        // original no. (1100 : 12) had its rightmost set-bit. Consider this no. (0100) to be the mask of
         // the original no. (1100) Now, if we perform and operation, we get :-
-        // 1100 & 0100 ---> 0100 (Set at rightmost posn of 12). 
+        // 1100 & 0100 ---> 0100 (Set at rightmost posn of 12).
 
         //  My task is to filter out no.s from array
-
-        for(int i = 0; i< n ; i++){
-            if(arr[i] & right_most_set_bit)    // arr[i] belongs to first set 
-                missing = arr[i];
-            else    // arr[i] belongs to second set
-                repeating = arr[i];  
+        // cout<<XOR1<<endl;
+        // cout<<right_most_set_bit<<endl;
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] & right_most_set_bit) // arr[i] belongs to first set
+                missing ^= arr[i];
+            else // arr[i] belongs to second set
+                repeating ^= arr[i];
         }
-        
-    }
 
+        for (int i = 1; i <= n; i++)
+        {
+            if (i & right_most_set_bit) 
+                missing ^= i;
+            else
+                repeating ^= i;
+        }
+        for(int i=0; i<n; i++){
+            if(arr[i] == missing){
+                swap(repeating, missing);
+                break;
+            }
+        }
+        ans[0] = repeating;
+        ans[1] = missing;
+        return ans;
+    }
 };
 
 int main()
@@ -85,7 +105,8 @@ int main()
     int arr[n];
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-
+    // n = 8
+    // arr = 3 1 4 6 2 1 5 7
     Solution sol;
     auto ans = sol.findTwoElement(arr, n);
     cout << "Repeating = " << ans[0] << " Missing = " << ans[1] << endl;
