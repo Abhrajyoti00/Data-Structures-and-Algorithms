@@ -16,7 +16,7 @@ def Rearrange(arr):
     i+=1
     k = 0
     start_of_neg = i
-
+    print(arr)
     while(i<len(arr)):
         arr[k], arr[i] = arr[i], arr[k]
         i+=1
@@ -29,6 +29,7 @@ def Rearrange(arr):
     
 
 # arr = [-5, -2, 5, 2, 4, 7, 1, 8, 0, -8]
-arr = [1,2,-1,6,-4,-3,8,7]
+# arr = [1,2,-1,6,-4,-3,8,7]
+arr = [-1, 2, -3, 4, 5, 6, -7, 8, -9]
 # arr = [-1,2,-3,4,5,8,9,-10,11,-12]
 Rearrange(arr)
