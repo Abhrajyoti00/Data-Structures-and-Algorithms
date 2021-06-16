@@ -64,6 +64,15 @@ public:
         // original no. (1100 : 12) had its rightmost set-bit. Consider this no. (0100) to be the mask of 
         // the original no. (1100) Now, if we perform and operation, we get :-
         // 1100 & 0100 ---> 0100 (Set at rightmost posn of 12). 
+
+        //  My task is to filter out no.s from array
+
+        for(int i = 0; i< n ; i++){
+            if(arr[i] & right_most_set_bit)    // arr[i] belongs to first set 
+                missing = arr[i];
+            else    // arr[i] belongs to second set
+                repeating = arr[i];  
+        }
         
     }
 
