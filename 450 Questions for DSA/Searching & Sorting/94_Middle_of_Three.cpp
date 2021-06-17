@@ -31,16 +31,31 @@ class Solution{
     // }
 
     // 2 comparisons
+    // int middle(int A, int B, int C){
+    //     int x,y,z;
+    //     x = A-B;   // X>0 means A>B
+    //     y = B-C;   // y>0 means B>C
+    //     z = A-C;   // z>0 means A>C
+    //     if(x*y > 0)
+    //         return B;
+    //     if(z*y > 0)
+    //         return A;
+    //     return C;
+    // }
+
     int middle(int A, int B, int C){
-        int x,y,z;
-        x = A-B;   // X>0 means A>B
-        y = B-C;   // y>0 means B>C
-        z = A-C;   // z>0 means A>C
-        if(x*y > 0)
-            return B;
-        if(z*y > 0)
-            return A;
-        return C;
+        int avg = (A+B+C)/3;
+        int min = abs(avg-A);
+        int temp = A;
+        if(min>abs(avg-B)){
+            temp = B;
+            min = abs(avg-B);
+        }
+        if(min>abs(avg-C)){
+            temp = C;
+            min = abs(avg-C);
+        }
+        return temp;
     }
 
 };
