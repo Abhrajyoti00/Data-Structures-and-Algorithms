@@ -40,22 +40,18 @@ public:
         if(size == 1)
             return arr[0];
         int count = 1, maj_ele = arr[0];
+        // 29   1 1 2 2 2 2 2 2 2 2 2 2 2 1 2 2 1 1 2 1 1 1 1 2 2 1 1 1 1     ans = 2
+
         for(int i = 1; i<size; i++){
-            if(arr[i]!=arr[i-1]){
-                if(arr[i] == maj_ele)
-                    count+=1;
-                else
-                    count-=1;
+            if(arr[i]!=maj_ele){
+                count-=1;
+                if(count == 0){
+                    maj_ele = arr[i];
+                    count = 1;
+                }
             }
-            else if(arr[i] == arr[i-1]){
+            else if(arr[i] == maj_ele)
                 count+=1;
-                maj_ele = arr[i];    // Ei line e error ache... Jokhon por por duto not majority but same element ashe tokhon amar majority element change hoye jacche
-            }
-            if(count == 0){
-                maj_ele = arr[i];
-                count = 1;
-            }
-            
         }
         if(count == 0)
             return -1;
