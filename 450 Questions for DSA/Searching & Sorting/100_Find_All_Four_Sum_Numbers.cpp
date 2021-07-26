@@ -12,6 +12,7 @@ class Solution{
         vector<int>::iterator big_it;
         vector<int>::iterator it;
         n = arr.size();
+        sort(arr.begin(), arr.end());
         unordered_map<int, int> mp;
         for(int i = 0; i<n;i++){
             mp[arr[i]]++;
@@ -23,30 +24,47 @@ class Solution{
             ans_small.push_back(arr[i]);
             for(int j = i+1; j<=n-3;j++){
                 mp[arr[j]]-=1;
-                temp_sum-=arr[i];
+                temp_sum-=arr[j];
                 ans_small.push_back(arr[j]);
                 for(int k = j+1; k<=n-2; k++){
                     mp[arr[k]]-=1;
-                    temp_sum-=arr[i];
+                    temp_sum-=arr[k];
                     ans_small.push_back(arr[k]);
-                    if(mp.find(temp_sum)!=mp.end() && mp[temp_sum]>0){
+                    if(mp.find(temp_sum)!=mp.end() && mp[temp_sum]>0 && temp_sum >= arr[k]){
                         ans_small.push_back(temp_sum);
+                        cout<<"Answer = "<<arr[i]<<arr[j]<<arr[k]<<temp_sum<<endl;
                         // ans_small.push_back(); //Substitute with $ later
                         ans_big.push_back(ans_small);
+                        temp_sum+=arr[k];
+                        ans_small.pop_back();
+                        ans_small.pop_back();
+                        mp[arr[k]]+=1;
+                        // it = ans_small.begin();
+                        // it+=k;
+                        // ans_small.erase(it);
+
                     }
                     else{
                         mp[arr[k]]+=1;
-                        it = ans_small.begin()+k;
-                        ans_small.erase(it);
+                        // it = ans_small.begin();
+                        // it+=k;
+                        temp_sum+=arr[k];
+                        ans_small.pop_back();
+                        // ans_small.erase(it);
+                        // ans_small.erase(arr[k]);
                     }
                 }
                 mp[arr[j]]+=1;
-                it = ans_small.begin()+j;
-                ans_small.erase(it);
+                // it = ans_small.begin()+j;
+                temp_sum+=arr[j];
+                ans_small.pop_back();
+                // ans_small.erase(it);
             }
             mp[arr[i]]+=1;
-            it = ans_small.begin()+i;
-            ans_small.erase(it);
+            // it = ans_small.begin()+i;
+            temp_sum+=arr[i];
+            ans_small.pop_back();
+            // ans_small.erase(it);
         }
         return ans_big;
     }
@@ -54,6 +72,14 @@ class Solution{
 
 int main()
 {
+
+    /*7 23
+    10 2 3 4 5 7 8 
+
+
+    6 21
+    1 4 45 6 10 12
+    */
     int n;
     cin >> n;
     int arr[n];
@@ -69,7 +95,7 @@ int main()
     ans = s.fourSum(my_vec, k);
     for(int i = 0; i<ans.size();i++)
     {
-        for(int j = 0; j<ans[i].size();i++){
+        for(int j = 0; j<ans[i].size();j++){
             cout<<ans[i][j]<<" ";
         }
         cout<<"$";
