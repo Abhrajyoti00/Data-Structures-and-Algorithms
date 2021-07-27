@@ -42,6 +42,10 @@ public:
     //     return ans_big;
     // }
 
+
+    // More optimised 
+    // TC : O(n^3) SC: O(1)
+    
     vector<vector<int>> fourSum(vector<int> &arr, int s)
     {
         int n;
@@ -77,7 +81,9 @@ public:
                         }
                     }
                 }
+                while(j<n && arr[j+1] == arr[j])    j++;
             }
+            while(i<n && arr[i+1] == arr[i])    i++;
         }
         return ans_big;
     }
