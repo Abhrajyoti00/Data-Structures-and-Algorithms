@@ -6,36 +6,79 @@ class Solution
 public:
     // arr[] : int input array of integers
     // k : the quadruple sum required
+
+    // Not_So_Optimised but Accepted
+
+    // vector<vector<int>> fourSum(vector<int> &arr, int s)
+    // {
+    //     int n;
+    //     vector<int> ans_small;
+    //     vector<vector<int>> ans_big;
+
+    //     n = arr.size();
+    //     sort(arr.begin(), arr.end());
+    //     set<vector<int>> power_set;
+    //     for (int i = 0; i <= n - 4; i++)
+    //     {
+    //         for (int j = i + 1; j <= n - 3; j++)
+    //         {
+    //             for (int k = j + 1; k <= n - 2; k++)
+    //             {
+    //                 int sum_reqd = s - (arr[i] + arr[j] + arr[k]);
+    //                 if (binary_search(arr.begin() + (k + 1), arr.end(), sum_reqd))
+    //                 {
+    //                     ans_small.push_back(arr[i]);
+    //                     ans_small.push_back(arr[j]);
+    //                     ans_small.push_back(arr[k]);
+    //                     ans_small.push_back(sum_reqd);
+    //                     power_set.insert(ans_small);
+    //                     ans_small.clear();
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     for (auto iterator : power_set)
+    //         ans_big.push_back(iterator);
+    //     return ans_big;
+    // }
+
     vector<vector<int>> fourSum(vector<int> &arr, int s)
     {
         int n;
-        vector<int> ans_small;
         vector<vector<int>> ans_big;
-
         n = arr.size();
         sort(arr.begin(), arr.end());
-        set<vector<int>> power_set;
-        for (int i = 0; i <= n - 4; i++)
+        for (int i = 0; i <n; i++)
         {
-            for (int j = i + 1; j <= n - 3; j++)
+            for (int j = i + 1; j < n; j++)
             {
-                for (int k = j + 1; k <= n - 2; k++)
+                int target = s-(arr[i]+arr[j]);
+                int left = j+1;
+                int right = n-1;
+                while (left<right)
                 {
-                    int sum_reqd = s - (arr[i] + arr[j] + arr[k]);
-                    if (binary_search(arr.begin() + (k + 1), arr.end(), sum_reqd))
-                    {
+                    int sum_of_two = arr[left]+arr[right];
+                    if(sum_of_two<target)
+                        left++;
+                    else if(sum_of_two>target)
+                        right--;
+                    else{
+                        vector<int> ans_small;
                         ans_small.push_back(arr[i]);
                         ans_small.push_back(arr[j]);
-                        ans_small.push_back(arr[k]);
-                        ans_small.push_back(sum_reqd);
-                        power_set.insert(ans_small);
-                        ans_small.clear();
+                        ans_small.push_back(arr[left]);
+                        ans_small.push_back(arr[right]);
+                        ans_big.push_back(ans_small);
+                        while(left<right && arr[left] == ans_small[2]){
+                            left++;
+                        }
+                        while(left<right && arr[right] == ans_small[3]){
+                            right--;
+                        }
                     }
                 }
             }
         }
-        for (auto iterator : power_set)
-            ans_big.push_back(iterator);
         return ans_big;
     }
 };
