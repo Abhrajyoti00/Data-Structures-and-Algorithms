@@ -9,63 +9,29 @@ class Solution{
         int n;
         vector<int>ans_small;
         vector<vector<int>>ans_big;
-        vector<int>::iterator big_it;
-        vector<int>::iterator it;
+        
         n = arr.size();
         sort(arr.begin(), arr.end());
         unordered_map<int, int> mp;
-        for(int i = 0; i<n;i++){
-            mp[arr[i]]++;
-        }
+        set<vector<int>>power_set;
         for(int i = 0; i<= n-4; i++){
-            int temp_sum = s;
-            mp[arr[i]]-=1;
-            temp_sum-=arr[i];
-            ans_small.push_back(arr[i]);
             for(int j = i+1; j<=n-3;j++){
-                mp[arr[j]]-=1;
-                temp_sum-=arr[j];
-                ans_small.push_back(arr[j]);
                 for(int k = j+1; k<=n-2; k++){
-                    mp[arr[k]]-=1;
-                    temp_sum-=arr[k];
-                    ans_small.push_back(arr[k]);
-                    if(mp.find(temp_sum)!=mp.end() && mp[temp_sum]>0 && temp_sum >= arr[k]){
-                        ans_small.push_back(temp_sum);
-                        cout<<"Answer = "<<arr[i]<<arr[j]<<arr[k]<<temp_sum<<endl;
-                        // ans_small.push_back(); //Substitute with $ later
-                        ans_big.push_back(ans_small);
-                        temp_sum+=arr[k];
-                        ans_small.pop_back();
-                        ans_small.pop_back();
-                        mp[arr[k]]+=1;
-                        // it = ans_small.begin();
-                        // it+=k;
-                        // ans_small.erase(it);
-
-                    }
-                    else{
-                        mp[arr[k]]+=1;
-                        // it = ans_small.begin();
-                        // it+=k;
-                        temp_sum+=arr[k];
-                        ans_small.pop_back();
-                        // ans_small.erase(it);
-                        // ans_small.erase(arr[k]);
-                    }
-                }
-                mp[arr[j]]+=1;
-                // it = ans_small.begin()+j;
-                temp_sum+=arr[j];
-                ans_small.pop_back();
-                // ans_small.erase(it);
+                    int sum_reqd = s - (arr[i]+arr[j]+arr[k]);
+                    if(binary_search(arr.begin()+(k+1), arr.end(), sum_reqd))
+                        {
+                            ans_small.push_back(arr[i]);
+                            ans_small.push_back(arr[j]);
+                            ans_small.push_back(arr[k]);
+                            ans_small.push_back(sum_reqd);
+                        }
+                        power_set.insert(ans_small);
+                        ans_small.clear();
+                }   
             }
-            mp[arr[i]]+=1;
-            // it = ans_small.begin()+i;
-            temp_sum+=arr[i];
-            ans_small.pop_back();
-            // ans_small.erase(it);
         }
+        for(auto iterator: power_set)
+            ans_big.push_back(iterator);
         return ans_big;
     }
 };
