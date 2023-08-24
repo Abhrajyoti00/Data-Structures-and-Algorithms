@@ -10,11 +10,16 @@ using namespace std;
 class Solution {
   public:
     int getMinDiff(int arr[], int n, int k) {
-        set<int>s;
-        for(int i = 0; i<n; i++){
-            s.insert(arr[i]);
+        sort(arr, arr+n);
+        int ans = arr[n - 1] - arr[0];
+        for(int i = 1; i<n; i++){
+            if(arr[i]-k<0)
+                continue;
+            int temp_min = min(arr[0]+k, arr[i]-k);        //try to maximise the least value
+            int temp_max = max(arr[n-1]-k, arr[i-1]+k);     // try to minimise the greatest value
+            ans = min(ans, temp_max - temp_min);
         }
-        
+        return ans;
     }
 };
 
