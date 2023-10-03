@@ -1,74 +1,86 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Node{
+struct Node
+{
     int data;
-    Node* leftChild;
-    Node* rightChild;
+    Node *leftChild;
+    Node *rightChild;
 
-    Node(int val) : data(val), leftChild(nullptr), rightChild(nullptr){}
+    Node(int val) : data(val), leftChild(nullptr), rightChild(nullptr) {}
 };
 
-class Queue{
-    private:
-        vector<Node*> nodes;
-    
-    public:
-        void enqueue(Node* node){
-            nodes.push_back(node);
-        }
+class Queue
+{
+private:
+    vector<Node *> nodes;
 
-        Node* dequeue(){
-            if(nodes.empty())
-                return nullptr;
+public:
+    void enqueue(Node *node)
+    {
+        nodes.push_back(node);
+    }
 
-            Node* frontNode = nodes.front();
-            nodes.erase(nodes.begin());
-            return frontNode;
-        }
+    Node *dequeue()
+    {
+        if (nodes.empty())
+            return nullptr;
 
-        bool isEmpty(){
-            return nodes.empty();
-        }
+        Node *frontNode = nodes.front();
+        nodes.erase(nodes.begin());
+        return frontNode;
+    }
+
+    bool isEmpty()
+    {
+        return nodes.empty();
+    }
 };
 
-Node* BuildTree(vector<int> &data){
-    if(data.empty() || data[0] == -1 || data[0] == -2){
+Node *BuildTree(vector<int> &data)
+{
+    if (data.empty() || data[0] == -1 || data[0] == -2)
+    {
         return nullptr;
     }
 
-    Node* root = new Node(data[0]);
+    Node *root = new Node(data[0]);
     Queue q;
     q.enqueue(root);
     Node *cur = nullptr;
     int count = 0;
 
-    for(int i = 1; i<data.size()-1; i++){
-        Node* node = new Node(data[i]);
-        if(count == 0){
+    for (int i = 1; i < data.size() - 1; i++)
+    {
+        Node *node = new Node(data[i]);
+        if (count == 0)
+        {
             cur = q.dequeue();
             count++;
             cur->leftChild = node;
         }
-        else{
+        else
+        {
             count = 0;
             cur->rightChild = node;
         }
-        if(data[i]!=-1)
+        if (data[i] != -1)
             q.enqueue(node);
     }
     return root;
-
 }
 
-void inorder(Node* root){
-    if(root == nullptr)
+void inorder(Node *root)
+{
+    if (root == nullptr)
         return;
     inorder(root->leftChild);
-    if(root->data != -1) cout << root->data << " ";
+    if (root->data != -1)
+        cout << root->data << " ";
     inorder(root->rightChild);
 }
-int main() {
+int main()
+{
     string line;
     getline(cin, line);
 
@@ -76,15 +88,16 @@ int main() {
     int num;
     vector<int> v;
 
-    while (ss >> num) {
+    while (ss >> num)
+    {
         v.push_back(num);
     }
 
     cout << "Integers stored in the vector: ";
     for (int i = 0; i < v.size(); i++)
         cout << v[i] << " ";
-    Node* root = BuildTree(v);
-    cout<<endl;
+    Node *root = BuildTree(v);
+    cout << endl;
     inorder(root);
     return 0;
 }
