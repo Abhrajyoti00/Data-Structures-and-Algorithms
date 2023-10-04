@@ -4,10 +4,10 @@ using namespace std;
 struct Node
 {
     int data;
-    Node *leftChild;
-    Node *rightChild;
+    Node *left;
+    Node *right;
 
-    Node(int val) : data(val), leftChild(nullptr), rightChild(nullptr) {}
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
 
@@ -31,12 +31,12 @@ Node* BuildTree(vector<int>& data)
         {
             cur = q.front();
             count++;
-            cur->leftChild = node;
+            cur->left = node;
         }
         else
         {
             count = 0;
-            cur->rightChild = node;
+            cur->right = node;
             q.pop();
         }
         if (data[i] != -1 && data[i] != -2)
@@ -50,10 +50,10 @@ void inorder(Node *root)
 {
     if (root == nullptr)
         return;
-    inorder(root->leftChild);
+    inorder(root->left);
     if (root->data != -1)
         cout << root->data << " ";
-    inorder(root->rightChild);
+    inorder(root->right);
 }
 int main()
 {
