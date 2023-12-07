@@ -26,25 +26,41 @@ Node* BuildTree(vector<int>& data)
 
     for (int i = 1; i < data.size(); i++)
     {
-        Node* node = new Node(data[i]);
-        if (count == 0)
-        {
-            cur = q.front();
-            count++;
-            cur->left = node;
+        if(data[i]!=-1){
+            Node* node = new Node(data[i]);
+            if (count == 0)
+            {
+                cur = q.front();
+                count++;
+                cur->left = node;
+            }
+            else
+            {
+                count = 0;
+                cur->right = node;
+                q.pop();
+            }
+            if (data[i] != -1 && data[i] != -2)
+                q.push(node);
         }
-        else
-        {
-            count = 0;
-            cur->right = node;
-            q.pop();
-        }
-        if (data[i] != -1 && data[i] != -2)
-            q.push(node);
     }
     return root;
 }
 
+int depth(Node* root){
+    if(root == nullptr)
+        return 0;
+    return max(depth(root->left), depth(root ->right)) + 1;
+}
+
+void preorder(Node *root)
+{
+    if(root == nullptr)
+        return;
+    cout<<root->data<< " ";
+    preorder(root->left);
+    preorder(root->right);
+}
 
 void inorder(Node *root)
 {
@@ -71,6 +87,10 @@ int main()
 
     Node *root = BuildTree(v);
     cout << endl;
+    cout<<"Inorder : ";
     inorder(root);
+    cout<<"\n Preorder : ";
+    preorder(root);
+    cout<<"\nDepth of Tree : "<< depth(root);
     return 0;
 }
