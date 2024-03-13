@@ -9,6 +9,6 @@ int main(){
     int *p = 0; // Always initialize pointer to a null value.
     cout<<p<<endl;
     cout<<*p<<endl;
-    (*p)++;
+    //(*p)++;  Dont execute
     cout<<*p<<endl;
 }

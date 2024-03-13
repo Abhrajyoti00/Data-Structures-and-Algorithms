@@ -1,2 +1,0 @@
-
-    vector<bool> visited(n);
